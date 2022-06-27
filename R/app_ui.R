@@ -4,6 +4,7 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @import bs4Dash
+#' @import leaflet
 #' @noRd
 app_ui <- function(request) {
   tagList(
@@ -11,16 +12,19 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     dashboardPage(
-      dashboardHeader(title = "Basic dashboard"),
+      dashboardHeader(title = "Train station dashboard"),
       dashboardSidebar(),
       dashboardBody(
         # Boxes need to be put in a row (or column)
         fluidRow(
-          box(plotOutput("plot1", height = 250)),
-
-          box(
-            title = "Controls",
-            sliderInput("slider", "Number of observations:", 1, 100, 50)
+          bs4Card(
+            title = "Corsica roads",
+            status = "primary",
+            solidHeader = FALSE,
+            collapsible = FALSE,
+            elevation = 4,
+            width = NULL,
+            leafletOutput("carte", height = 600, width = 600)
           )
         )
       )
