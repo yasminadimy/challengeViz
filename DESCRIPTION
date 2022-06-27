@@ -7,6 +7,7 @@ Description: Used to build a prod ready application for data viz
     challenge.
 License: What license is it under?
 Imports: 
+    bs4Dash,
     config (>= 0.3.1),
     golem (>= 0.3.2),
     shiny (>= 1.7.1)
