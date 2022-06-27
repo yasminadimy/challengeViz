@@ -21,9 +21,11 @@ app_ui <- function(request) {
         opacity = 0.8
         ),
       dashboardBody(
-        # Boxes need to be put in a row (or column)
-        fluidRow(
-
+          # Show a plot of the generated distribution
+          fluidRow(column(width = 2,
+                          verbatimTextOutput("currentpos"))),
+          # Show a plot of the generated distribution
+          fluidRow(
           checkboxGroupButtons(
             inputId = "moyentransport",
             label = "Which transport mode you want to display ?",
@@ -33,6 +35,14 @@ app_ui <- function(request) {
               yes = icon("ok",
                          lib = "glyphicon")
             )),
+          pickerInput(
+            'touristiclist', label = NULL,
+            choices = challengeViz::patrimoine$Nom,
+            multiple = TRUE,
+            options = list(
+              `live-search` = TRUE)
+          ),
+          tableOutput("data"),
           bs4Card(
             title = "Corsica roads",
             solidHeader = FALSE,

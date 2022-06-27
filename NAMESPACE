@@ -3,6 +3,7 @@
 export(run_app)
 import(bs4Dash)
 import(leaflet)
+import(leaflet.extras)
 import(shiny)
 import(shinyWidgets)
 importFrom(golem,activate_js)
