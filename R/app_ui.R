@@ -5,6 +5,7 @@
 #' @import shiny
 #' @import bs4Dash
 #' @import leaflet
+#' @import shinyWidgets
 #' @noRd
 app_ui <- function(request) {
   tagList(
@@ -13,18 +14,32 @@ app_ui <- function(request) {
     # Your application UI logic
     dashboardPage(
       dashboardHeader(title = "Train station dashboard"),
-      dashboardSidebar(),
+      sidebar = bs4DashSidebar(
+        skin = "light",
+        status = "primary",
+        elevation = 3,
+        opacity = 0.8
+        ),
       dashboardBody(
         # Boxes need to be put in a row (or column)
         fluidRow(
+
+          checkboxGroupButtons(
+            inputId = "moyentransport",
+            label = "Which transport mode you want to display ?",
+            choices = c("🚲", "🚙", "🚂"),
+            selected = c("🚲", "🚙", "🚂"),
+            checkIcon = list(
+              yes = icon("ok",
+                         lib = "glyphicon")
+            )),
           bs4Card(
             title = "Corsica roads",
-            status = "primary",
             solidHeader = FALSE,
             collapsible = FALSE,
             elevation = 4,
             width = NULL,
-            leafletOutput("carte", height = 600, width = 600)
+            leafletOutput("carte", height = 700, width = 700)
           )
         )
       )

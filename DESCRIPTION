@@ -13,7 +13,8 @@ Imports:
     config (>= 0.3.1),
     golem (>= 0.3.2),
     leaflet,
-    shiny (>= 1.7.1)
+    shiny (>= 1.7.1),
+    shinyWidgets
 Suggests: 
     spelling,
     testthat (>= 3.0.0)
