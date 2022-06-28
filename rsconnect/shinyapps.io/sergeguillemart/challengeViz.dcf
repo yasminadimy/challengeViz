@@ -1,0 +1,13 @@
+name: challengeViz
+title: challengeViz
+username:
+account: sergeguillemart
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6563279
+bundleId: 6051412
+url: https://sergeguillemart.shinyapps.io/challengeViz/
+when: 1656433206.81141
+lastSyncTime: 1656433206.81143
+asMultiple: FALSE
+asStatic: FALSE

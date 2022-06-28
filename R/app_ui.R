@@ -13,17 +13,19 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     dashboardPage(
-      dashboardHeader(title = "Train station dashboard"),
+      dashboardHeader(),
       sidebar = bs4DashSidebar(
+        disable = T,
         skin = "light",
         status = "primary",
         elevation = 3,
         opacity = 0.8
         ),
       dashboardBody(
-          # Show a plot of the generated distribution
-          fluidRow(column(width = 2,
-                          verbatimTextOutput("currentpos"))),
+          # Show the user location
+          # fluidRow(
+          #   column(width = 2,
+          #          verbatimTextOutput("currentpos"))),
           # Show a plot of the generated distribution
           fluidRow(
           checkboxGroupButtons(
@@ -34,23 +36,37 @@ app_ui <- function(request) {
             checkIcon = list(
               yes = icon("ok",
                          lib = "glyphicon")
-            )),
+            ))),
+          fluidRow(
           pickerInput(
-            'touristiclist', label = NULL,
+            'touristiclist',
+            label = "Which places do you want to visit ?",
             choices = challengeViz::patrimoine$Nom,
             multiple = TRUE,
             options = list(
               `live-search` = TRUE)
-          ),
-          tableOutput("data"),
+          )),
+          fluidRow(
+          bs4ValueBoxOutput("tripdistance"),
+          bs4ValueBoxOutput("tripduration")),
+          fluidRow(
           bs4Card(
-            title = "Corsica roads",
+            title = "Corsica map",
             solidHeader = FALSE,
             collapsible = FALSE,
             elevation = 4,
             width = NULL,
             leafletOutput("carte", height = 700, width = 700)
-          )
+          )),
+          fluidRow(
+            bs4Card(
+              title = "Trip steps",
+              solidHeader = FALSE,
+              collapsible = FALSE,
+              elevation = 4,
+              width = NULL,
+              tableOutput("data")
+            )
         )
       )
     )

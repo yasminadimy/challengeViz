@@ -6,6 +6,7 @@
 #' @import bs4Dash
 #' @import leaflet.extras
 #' @import leaflet
+#' @import osrm
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
@@ -63,6 +64,34 @@ app_server <- function(input, output, session) {
     }
 
     thecarte
+  })
+
+  output$tripduration <- renderbs4ValueBox({
+    trip <- challengeViz::patrimoine %>%
+      dplyr::filter(Nom %in% input$touristiclist) %>%
+      select(c( "id" = "Nom", "lon" = "Long","lat" = "Lat")) %>%
+      osrmTrip()
+
+    bs4ValueBox(
+      subtitle = "Trip duration",
+      color = "primary",
+      #gradientColor = "success",
+      value = paste(trip[[1]]$summary$duration / 60, "hours")
+    )
+  })
+
+  output$tripdistance <- renderbs4ValueBox({
+    trip <- challengeViz::patrimoine %>%
+      dplyr::filter(Nom %in% input$touristiclist) %>%
+      select(c( "id" = "Nom", "lon" = "Long","lat" = "Lat")) %>%
+      osrmTrip()
+
+    bs4ValueBox(
+      subtitle = "Trip distance",
+      color = "primary",
+      #gradientColor = "success",
+      value = paste(trip[[1]]$summary$distance, "km")
+    )
   })
 
 
